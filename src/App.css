@@ -1,0 +1,633 @@
+/* ==========================================================================
+   1. DESIGN SYSTEM VARIABLES & RESET
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+  --bg-primary: #0a0f12;       /* Deep industrial carbon */
+  --bg-secondary: #111820;     /* Metallic surface gray */
+  --accent: #14b8a6;           /* High-voltage Teal */
+  --accent-muted: #0f766e;     /* Deep Teal for depths */
+  --text-main: #f3f4f6;        /* Crisp off-white */
+  --text-muted: #9ca3af;       /* Ash gray */
+  --border-color: #1e293b;     /* Structured grid borders */
+  
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   2. REUSABLE INDUSTRIAL UTILITIES
+   ========================================================================== */
+section {
+  padding: 100px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+section > h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  color: var(--text-main);
+}
+
+section > h1::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--accent);
+}
+
+/* Hardline Cyberpunk Buttons */
+button, .description a {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 15px 35px;
+  background: transparent;
+  color: var(--text-main);
+  border: 2px solid var(--accent);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  position: relative;
+  clip-path: polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0 75%);
+}
+
+button:hover, .description a:hover {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.4);
+}
+
+/* Monolithic Form Fields */
+input, select, textarea {
+  width: 100%;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 14px 20px;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: var(--transition-fast);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(20, 184, 166, 0.15);
+}
+
+/* ==========================================================================
+   HEADER / NAVIGATION (WITH PULSING ACCENT)
+   ========================================================================== */
+header {
+  background-color: rgba(10, 15, 18, 0.95);
+  border-bottom: 2px solid var(--border-color);
+  padding: 25px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+}
+
+header p {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-main);
+  position: relative;
+}
+
+header p::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  /* Added pulsing animation */
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+@keyframes pulseDot {
+  0% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.7);
+  }
+  50% {
+    transform: translateY(-50%) scale(1.2);
+    /* Creates a glowing aura effect without changing the layout */
+    box-shadow: 0 0 12px 4px rgba(20, 184, 166, 0.4);
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(20, 184, 166, 0);
+  }
+}
+
+
+/* ==========================================================================
+   4. HERO SECTION
+   ========================================================================== */
+.hero {
+  min-height: calc(100vh - 82px);
+  background: linear-gradient(rgba(10, 15, 18, 0.8), rgba(10, 15, 18, 0.95)),
+              url('/img1.webp') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 0 10%;
+}
+
+.hero .content {
+  max-width: 800px;
+}
+
+.hero .title h1 {
+  font-size: 5.5rem;
+  line-height: 0.9;
+  color: var(--text-main);
+}
+
+.hero .title h1:nth-child(2) {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+}
+
+.hero .sub-title {
+  margin: 30px 0 40px 0;
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+}
+
+.hero .sub-title p:first-child {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+.hero .sub-title p:last-child {
+  font-size: 1.3rem;
+  color: var(--text-muted);
+}
+
+.hero .buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.hero .buttons button:last-child {
+  border-color: var(--text-main);
+}
+.hero .buttons button:last-child:hover {
+  background-color: var(--text-main);
+  color: var(--bg-primary);
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   5. WORKOUT SESSIONS & BOOTCAMPS
+   ========================================================================== */
+.workout_session {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.workout_session .wrapper {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 50px;
+  position: relative;
+}
+
+.workout_session .wrapper h1 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.workout_session .wrapper p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 35px;
+}
+
+.workout_session .wrapper img {
+  width: 100%;
+  height: 590px;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(110%);
+  border-left: 4px solid var(--accent);
+}
+
+.workout_session .bootcamps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+.workout_session .bootcamps > div {
+  background-color: var(--bg-primary);
+  border-left: 3px solid var(--border-color);
+  padding: 20px 25px;
+  transition: var(--transition-fast);
+}
+
+.workout_session .bootcamps > div:hover {
+  border-left-color: var(--accent);
+  transform: translateX(5px);
+}
+
+.workout_session .bootcamps h4 {
+  font-size: 1.3rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.workout_session .bootcamps p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   6. GALLERY SECTION (OPTIMIZED INDUSTRIAL MASONRY)
+   ========================================================================== */
+.gallery {
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.gallery .images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px; /* Slightly wider gap for clean industrial structural lines */
+  align-items: start;
+}
+
+.gallery .images > div {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.gallery .images img {
+  width: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary); /* Prevents flickering during loading shifts */
+}
+
+/* Kept intact: High-performance hover mechanics */
+.gallery .images img:hover {
+  filter: grayscale(0%) contrast(105%);
+  border-color: var(--accent);
+  transform: scale(1.025);
+  box-shadow: 0 10px 30px rgba(20, 184, 166, 0.15);
+  z-index: 2; /* Ensures scaling image bounds sit clean over structural borders */
+}
+
+/* ADVANCED ASYMMETRIC MASONRY SLICING
+   Targets individual images within their vertical stacks to create an 
+   interlocking geometric rhythm instead of uniform blocks.
+*/
+
+/* Column 1: Alternating mid-tall to compact structural anchors */
+.gallery .images > div:nth-child(1) img:nth-child(1) { height: 420px; }
+.gallery .images > div:nth-child(1) img:nth-child(2) { height: 280px; }
+.gallery .images > div:nth-child(1) img:nth-child(3) { height: 350px; }
+
+/* Column 2: Center visual weight offset (compact start, heavy drop) */
+.gallery .images > div:nth-child(2) img:nth-child(1) { height: 280px; }
+.gallery .images > div:nth-child(2) img:nth-child(2) { height: 460px; }
+.gallery .images > div:nth-child(2) img:nth-child(3) { height: 310px; }
+
+/* Column 3: Balanced trailing structural frame */
+.gallery .images > div:nth-child(3) img:nth-child(1) { height: 380px; }
+.gallery .images > div:nth-child(3) img:nth-child(2) { height: 340px; }
+.gallery .images > div:nth-child(3) img:nth-child(3) { height: 330px; }
+
+/* ==========================================================================
+   7. PRICING PLANS
+   ========================================================================== */
+.pricing .wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.pricing .card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing .card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(50%);
+  border-bottom: 3px solid var(--accent);
+}
+
+.pricing .card .title {
+  padding: 30px 30px 15px 30px;
+  text-align: center;
+}
+
+.pricing .card .title h1 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.pricing .card .title h3 {
+  font-size: 2.5rem;
+  color: var(--accent);
+}
+
+.pricing .card .title p {
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.pricing .card .description {
+  padding: 0 30px 40px 30px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.pricing .card .description p {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.pricing .card .description svg {
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.pricing .card .description a {
+  text-decoration: none;
+  text-align: center;
+  margin-top: auto;
+  display: block;
+}
+
+/* Highlight center premium package */
+.pricing .card:nth-child(2) {
+  border: 2px solid var(--accent);
+  transform: translateY(-10px);
+}
+
+/* ==========================================================================
+   8. BMI CALCULATOR
+   ========================================================================== */
+.bmi .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.bmi .wrapper:first-child {
+  padding: 60px;
+}
+
+.bmi form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.bmi form label {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+}
+
+.bmi .wrapper img {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(20%) contrast(110%);
+}
+
+/* ==========================================================================
+   9. CONTACT SECTION (PARALLAX BACKGROUND & RIGHT-ALIGNED FORM)
+   ========================================================================== */
+.contact {
+  width: 100%;
+  max-width: 100%; /* Background stretches edge-to-edge */
+  padding: 120px 5%; /* Generous vertical room for clean scrolling */
+  
+  /* Fixed Parallax Background Setup */
+  background: linear-gradient(rgba(10, 15, 18, 0.75), rgba(10, 15, 18, 0.9)),
+              url('/contact.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* Keeps image pinned relative to viewport */
+  
+  display: flex;
+  justify-content: flex-end; /* Shifts form container toward the right side */
+  align-items: center;
+  padding-right: 10%; /* Adjust this percentage to control exactly how far right it sits */
+}
+
+.contact form {
+  width: 100%;
+  max-width: 600px; /* Limits maximum form size for crisp text tracking */
+  background-color: rgba(17, 24, 32, 0.85); /* Semi-transparent metallic surface */
+  border: 1px solid var(--border-color);
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  backdrop-filter: blur(12px); /* Cyberpunk glassmorphism effect */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.contact form h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.contact label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+}
+
+.contact textarea {
+  height: 150px;
+  resize: none;
+}
+
+/* ==========================================================================
+   10. FOOTER
+   ========================================================================== */
+/* ==========================================================================
+   FOOTER (UPGRADED INDUSTRIAL ARCHITECTURE)
+   ========================================================================== */
+footer {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: var(--bg-primary); /* Switched to secondary for an anchor look */
+  border-top: 2px solid var(--border-color);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cyberpunk-style structural corner accents */
+footer::before, footer::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  width: 30px;
+  height: 4px;
+  background-color: var(--accent);
+  transition: var(--transition-fast);
+}
+
+footer::before { left: 10%; }
+footer::after { right: 10%; }
+
+/* Layout container to isolate the text and interaction */
+footer .footer-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  position: relative;
+  cursor: default;
+}
+
+/* Highlighting your developer name with a subtle color shift */
+footer span {
+  color: var(--text-main);
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+/* Interactive glow effect on hover */
+footer:hover::before {
+  left: 8%;
+  width: 50px;
+  box-shadow: 0 0 15px var(--accent);
+}
+
+footer:hover::after {
+  right: 8%;
+  width: 50px;
+  box-shadow: 0 0 15px var(--accent);
+}
+
+footer:hover span {
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(20, 184, 166, 0.4);
+}
+
+/* ==========================================================================
+   11. RESPONSIVE ARCHITECTURE
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero .title h1 { font-size: 4rem; }
+  .workout_session, .pricing .wrapper, .bmi .container {
+    grid-template-columns: 1fr;
+  }
+  .pricing .card:nth-child(2) {
+    transform: none;
+  }
+  .gallery .images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gallery .images > div:nth-child(3) {
+    display: none; /* Safely hides the extra columns for neat mobile wrapping */
+  }
+}
+
+@media (max-width: 768px) {
+  section { padding: 60px 20px; }
+  section > h1 { font-size: 2.2rem; }
+  .hero { padding: 0 5%; }
+  .hero .title h1 { font-size: 3.2rem; }
+  .workout_session .wrapper, .bmi .wrapper:first-child, .contact form {
+    padding: 30px 20px;
+  }
+  .gallery .images {
+    grid-template-columns: 1fr;
+  }
+  .hero .buttons {
+    flex-direction: column;
+  }
+}
